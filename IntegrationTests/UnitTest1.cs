@@ -16,14 +16,12 @@ namespace IntegrationTests
         [ClassInitialize]
         public static async Task ClassInitialize(TestContext context)
         {
-            var cosmosDb = new ContainerBuilder()
+            var cosmosDb = new CosmosDbBuilder()
                 .WithImage(COSMOSDB_IMAGE)
-                .WithPortBinding(8087, true)
                 .Build();
             await Task.Delay(1000);
             await cosmosDb.StartAsync();
-            int port = cosmosDb.GetMappedPublicPort(8087);
-            Debug.WriteLine($"Port number = {port}");
+            connString = cosmosDb.GetConnectionString();
         }
 
         [ClassCleanup]
