@@ -19,7 +19,6 @@ namespace IntegrationTests
             var cosmosDb = new CosmosDbBuilder()
                 .WithImage(COSMOSDB_IMAGE)
                 .Build();
-            await Task.Delay(1000);
             await cosmosDb.StartAsync();
             connString = cosmosDb.GetConnectionString();
         }
